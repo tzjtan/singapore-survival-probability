@@ -2,9 +2,11 @@
 
 Interactive visualization of survival probabilities using Singapore's mortality data. Understand the statistical likelihood of reaching various ages—a perspective often missing from retirement planning.
 
+**[View site →](https://tzjtan.github.io/singapore-survival-probability/)**
+
 ## Why This Matters
 
-Retirement planning fixates on money while ignoring a fundamental truth: **life is ephemeral**. This tool visualizes survival probabilities alongside life expectancy metrics, enabling you to plan not just financially, but existentially.
+Retirement planning fixates on money while ignoring a fundamental truth that life is ephemeral. This tool visualizes survival probabilities alongside life expectancy metrics, enabling you to plan not just financially, but existentially.
 
 Use it to inform:
 - Retirement timing (work longer vs. enjoy years while healthy)
@@ -25,7 +27,7 @@ Given mortality rate *m(a)* per 1,000 at age *a*:
 **Reference Lines**:
 - **LE at Birth**: Average years a newborn is expected to live
 - **LE at 65**: Average remaining years from age 65
-- **HALE**: Years lived in full health (Global Burden of Disease methodology)
+- **HALE**: Health-adjusted life expentancy, the years lived in full health (Global Burden of Disease methodology)
 
 The official data for the mortality is grouped each 5-year age group. This causes the survival probability graph to be too jagged. A linear interpolation is done by looking at the mortality at the previous age to see how the mortalities per age in the next 5-year age group should be distributed while retaining the average mortality in the age group to be equal to the official figure.
 
@@ -38,3 +40,4 @@ From data.gov.sg:
 3. **Life Expectancy** ([`d_af61b90018b8fabecabe8e93950e0223`](https://data.gov.sg/datasets?resultId=d_af61b90018b8fabecabe8e93950e0223)) - 1960s to present, at birth and age 65
 
 Live data with embedded fallback. Earlier years have coarser age breakdowns (70+).
+
