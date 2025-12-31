@@ -10,6 +10,8 @@ Retirement planning fixates on money while ignoring a fundamental truth that lif
 
 Do you know that you (assuming average Singaporean) have a 95% chance of surviving 59 years old, a 80% chance of surviving 75 years old and 50% chance of surviving 84 years old? I think that would be more helpful information to look ahead into one's life.
 
+Also, as a public service announcement, please don't wait until the official retirement age (63 years) to do what you wish to do in life as only 93% of Singaporeans survive to that age.
+
 ## Mathematics
 
 **Survival Probability**: Cumulative probability of surviving from birth to age *x*.
@@ -36,5 +38,6 @@ From data.gov.sg:
 3. **Life Expectancy** ([`d_af61b90018b8fabecabe8e93950e0223`](https://data.gov.sg/datasets?resultId=d_af61b90018b8fabecabe8e93950e0223)) - 1960s to present, at birth and age 65
 
 Live data with embedded fallback. Earlier years have coarser age breakdowns (70+).
+
 
 
