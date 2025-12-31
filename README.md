@@ -6,13 +6,9 @@ Interactive visualization of survival probabilities using Singapore's mortality 
 
 ## Why This Matters
 
-Retirement planning fixates on money while ignoring a fundamental truth that life is ephemeral. This tool visualizes survival probabilities alongside life expectancy metrics, enabling you to plan not just financially, but existentially.
+Retirement planning fixates on money while ignoring a fundamental truth that life is ephemeral. Knowing the life expectancy of 83.5 years is not enough information (*so what, I drop dead at 83.5?*). Knowing the mortality rates is also not helpful (*ok, so I have a 0.3% chance of dying in the next year but then what?*). For long-term planning, it is essential to convert the figures into another form.
 
-Use it to inform:
-- Retirement timing (work longer vs. enjoy years while healthy)
-- Healthcare planning (healthy years vs. total years)
-- Life priorities (when to pursue meaningful experiences)
-- Financial planning (realistic longevity expectations)
+Do you know that you (assuming average Singaporean) have a 95% chance of surviving 59 years old, a 80% chance of surviving 75 years old and 50% chance of surviving 84 years old? I think that would be more helpful information to look ahead into one's life.
 
 ## Mathematics
 
@@ -40,4 +36,5 @@ From data.gov.sg:
 3. **Life Expectancy** ([`d_af61b90018b8fabecabe8e93950e0223`](https://data.gov.sg/datasets?resultId=d_af61b90018b8fabecabe8e93950e0223)) - 1960s to present, at birth and age 65
 
 Live data with embedded fallback. Earlier years have coarser age breakdowns (70+).
+
 
