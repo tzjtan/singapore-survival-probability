@@ -7,9 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 </head>
-<body class="bg-gray-50 p-8">
-    <!-- GitHub Banner -->
-    <a href="https://github.com/tzjtan/singapore-survival-probability" target="_blank" class="fixed top-0 right-0 z-50">
+<body class="bg-gray-50 p-2 sm:p-8">
+    <!-- GitHub Banner - hidden on mobile -->
+    <a href="https://github.com/tzjtan/singapore-survival-probability" target="_blank" class="hidden sm:block fixed top-0 right-0 z-50">
         <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
             <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
             <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
@@ -23,88 +23,97 @@
     </style>
 
     <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-3 gap-4">
-            <!-- Chart on left (2/3 width) -->
-            <div class="col-span-2">
-                <div id="chart" class="bg-white p-4 rounded shadow overflow-hidden" style="height: 600px;"></div>
-            </div>
-            
-            <!-- Controls on right (1/3 width) -->
-            <div class="col-span-1">
+        <div class="flex flex-col lg:grid lg:grid-cols-3 gap-4">
+            <!-- Controls - at top on mobile, right on desktop -->
+            <div class="lg:col-span-1 lg:order-2">
                 <div class="bg-white p-4 rounded shadow">
-                    
-                    <div class="mb-3">
-                        <label class="block text-sm font-medium mb-1">
-                            <span class="inline-block w-16">Year</span>
-                            <select id="yearSelect" class="border rounded px-2 py-1 text-sm w-32 ml-2">
-                                <!-- Options populated by JavaScript -->
-                            </select>
-                        </label>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label class="block text-sm font-medium mb-1">
-                            <span class="inline-block w-16">Gender</span>
-                            <span class="ml-2 inline-flex gap-3 text-sm font-normal">
-                                <label class="flex items-center">
-                                    <input type="radio" name="gender" value="total" checked class="mr-1">
-                                    Total
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="radio" name="gender" value="male" class="mr-1">
-                                    Male
-                                </label>
-                                <label class="flex items-center">
-                                    <input type="radio" name="gender" value="female" class="mr-1">
-                                    Female
-                                </label>
-                            </span>
-                        </label>
-                    </div>
-                    
-                    <div class="mb-3 border-t pt-3">
-                        <label class="block text-sm font-medium mb-2">Show Reference Lines</label>
-                        <div class="space-y-1 text-sm">
-                            <div class="flex items-center">
-                                <input type="checkbox" id="showHALE" checked class="mr-2">
-                                <label for="showHALE" class="flex items-center">
-                                    Health-Adjusted Life Expectancy (HALE)
-                                    <span class="ml-1 text-gray-500 cursor-help" title="Health-Adjusted Life Expectancy: Expected years lived in full health">ⓘ</span>
-                                </label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="showLE" checked class="mr-2">
-                                <label for="showLE" class="flex items-center">
-                                    Life Expectancy at Birth
-                                    <span class="ml-1 text-gray-500 cursor-help" title="Life Expectancy at Birth: Expected total years of life from birth">ⓘ</span>
-                                </label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="showLE65" checked class="mr-2">
-                                <label for="showLE65" class="flex items-center">
-                                    Life Expectancy at 65
-                                    <span class="ml-1 text-gray-500 cursor-help" title="Life Expectancy at Age 65: Expected remaining years of life at age 65">ⓘ</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button id="addBtn" class="w-full bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 mb-4 text-sm">
-                        Add to Chart
+                    <!-- Toggle button for mobile -->
+                    <button id="toggleControls" class="lg:hidden w-full bg-gray-200 text-gray-700 px-3 py-2 rounded hover:bg-gray-300 mb-3 text-sm font-medium flex items-center justify-between">
+                        <span>Controls</span>
+                        <svg id="toggleIcon" class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
                     </button>
                     
-                    <div class="border-t pt-3">
-                        <h3 class="text-sm font-semibold mb-2">Selected Series</h3>
-                        <div id="seriesList" class="space-y-1">
-                            <!-- Series items will be added here -->
+                    <div id="controlsContent">
+                        <div class="mb-3">
+                            <label class="block text-sm font-medium mb-1">
+                                <span class="inline-block w-16">Year</span>
+                                <select id="yearSelect" class="border rounded px-2 py-1 text-sm w-32 ml-2">
+                                    <!-- Options populated by JavaScript -->
+                                </select>
+                            </label>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="block text-sm font-medium mb-1">
+                                <span class="inline-block w-16">Gender</span>
+                                <span class="ml-2 inline-flex gap-3 text-sm font-normal flex-wrap">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="gender" value="total" checked class="mr-1">
+                                        Total
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="gender" value="male" class="mr-1">
+                                        Male
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="gender" value="female" class="mr-1">
+                                        Female
+                                    </label>
+                                </span>
+                            </label>
+                        </div>
+                        
+                        <div class="mb-3 border-t pt-3">
+                            <label class="block text-sm font-medium mb-2">Show Reference Lines</label>
+                            <div class="space-y-1 text-sm">
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="showHALE" checked class="mr-2">
+                                    <label for="showHALE" class="flex items-center">
+                                        Health-Adjusted Life Expectancy (HALE)
+                                        <span class="ml-1 text-gray-500 cursor-help" title="Health-Adjusted Life Expectancy: Expected years lived in full health">ⓘ</span>
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="showLE" checked class="mr-2">
+                                    <label for="showLE" class="flex items-center">
+                                        Life Expectancy at Birth
+                                        <span class="ml-1 text-gray-500 cursor-help" title="Life Expectancy at Birth: Expected total years of life from birth">ⓘ</span>
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="showLE65" checked class="mr-2">
+                                    <label for="showLE65" class="flex items-center">
+                                        Life Expectancy at 65
+                                        <span class="ml-1 text-gray-500 cursor-help" title="Life Expectancy at Age 65: Expected remaining years of life at age 65">ⓘ</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button id="addBtn" class="w-full bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 mb-4 text-sm">
+                            Add to Chart
+                        </button>
+                        
+                        <div class="border-t pt-3">
+                            <h3 class="text-sm font-semibold mb-2">Selected Series</h3>
+                            <div id="seriesList" class="space-y-1">
+                                <!-- Series items will be added here -->
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
+            <!-- Chart - below controls on mobile, left on desktop -->
+            <div class="lg:col-span-2 lg:order-1">
+                <div id="chart" class="bg-white p-2 sm:p-4 rounded shadow overflow-hidden"></div>
+            </div>
         </div>
         
-        <div class="mt-6 text-xs text-gray-400 text-center">
-            <p>Disclaimer: Survival probabilities at older ages may be inaccurate due to the accumulation of computational errors across all preceding age groups. <br>Additionally, missing age-specific mortality data for advanced ages in earlier years may further reduce accuracy.</p>
+        <div class="mt-6 text-xs text-gray-400 text-center px-2">
+            <p>Disclaimer: Survival probabilities at older ages may be inaccurate due to the accumulation of computational errors across all preceding age groups. <br class="hidden sm:inline">Additionally, missing age-specific mortality data for advanced ages in earlier years may further reduce accuracy.</p>
         </div>
     </div>
 
@@ -349,6 +358,33 @@
             document.getElementById('showHALE').addEventListener('change', updateChart);
             document.getElementById('showLE').addEventListener('change', updateChart);
             document.getElementById('showLE65').addEventListener('change', updateChart);
+            
+            // Add toggle controls listener
+            const toggleBtn = document.getElementById('toggleControls');
+            const content = document.getElementById('controlsContent');
+            const icon = document.getElementById('toggleIcon');
+            
+            toggleBtn.addEventListener('click', function() {
+                if (content.style.display === 'none') {
+                    content.style.display = 'block';
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    content.style.display = 'none';
+                    icon.style.transform = 'rotate(-90deg)';
+                }
+            });
+            
+            // Ensure controls are visible on mobile and when resizing
+            function ensureControlsVisible() {
+                const isMobile = window.innerWidth < 1024; // lg breakpoint
+                if (isMobile) {
+                    content.style.display = 'block';
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            }
+            
+            ensureControlsVisible();
+            window.addEventListener('resize', ensureControlsVisible);
             
             updateChart();
         }
@@ -624,16 +660,20 @@
                 }
             });
             
+            // Adjust height based on screen size
+            const isMobile = window.innerWidth < 640;
+            const chartHeight = isMobile ? 400 : 600;
+            
             const layout = {
                 title: {
                     text: 'Survival Probability by Age in Singapore 🇸🇬',
-                    font: { weight: 'bold' }
+                    font: { weight: 'bold', size: isMobile ? 14 : 16 }
                 },
-                xaxis: { title: 'Age (years)', range: [0, 120] },
-                yaxis: { title: 'Survival Probability (%)', range: [0, 100] },
+                xaxis: { title: 'Age (years)', range: [0, 120], titlefont: { size: isMobile ? 11 : 12 } },
+                yaxis: { title: 'Survival Probability (%)', range: [0, 100], titlefont: { size: isMobile ? 11 : 12 } },
                 hovermode: 'closest',
-                height: 560,
-                margin: { l: 60, r: 80, t: 60, b: 50 },
+                height: chartHeight,
+                margin: { l: isMobile ? 50 : 60, r: isMobile ? 20 : 80, t: isMobile ? 40 : 60, b: isMobile ? 40 : 50 },
                 legend: {
                     x: 0.99,
                     y: 0.99,
@@ -641,7 +681,8 @@
                     yanchor: 'top',
                     bgcolor: 'rgba(255, 255, 255, 0.9)',
                     bordercolor: '#ccc',
-                    borderwidth: 1
+                    borderwidth: 1,
+                    font: { size: isMobile ? 9 : 12 }
                 }
             };
             
@@ -684,6 +725,11 @@
             selectedSeries.push({year: latestYear, gender: 'total', id: `${latestYear}-T`});
             updateSeriesList();
             updateChart();
+            
+            // Add resize listener to update chart on orientation change
+            window.addEventListener('resize', () => {
+                updateChart();
+            });
         });
     </script>
 </body>
