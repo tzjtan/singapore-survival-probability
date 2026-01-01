@@ -2,6 +2,8 @@
 
 Interactive visualization of survival probabilities using Singapore's mortality data. Understand the statistical likelihood of reaching various ages—a perspective often missing from retirement planning.
 
+<img src="https://github.com/tzjtan/singapore-survival-probability/blob/main/Screenshot.png" width="400" />
+
 **[View site →](https://tzjtan.github.io/singapore-survival-probability/)**
 
 ## Why This Matters
