@@ -2,7 +2,7 @@
 
 Interactive visualization of survival probabilities using Singapore's mortality data. Understand the statistical likelihood of reaching various ages—a perspective often missing from retirement planning.
 
-<img src="https://github.com/tzjtan/singapore-survival-probability/blob/main/Screenshot.png" width="400" />
+<img src="https://github.com/tzjtan/singapore-survival-probability/blob/main/Screenshot.png" />
 
 **[View site →](https://tzjtan.github.io/singapore-survival-probability/)**
 
@@ -40,6 +40,7 @@ From data.gov.sg:
 3. **Life Expectancy** ([`d_af61b90018b8fabecabe8e93950e0223`](https://data.gov.sg/datasets?resultId=d_af61b90018b8fabecabe8e93950e0223)) - 1960s to present, at birth and age 65
 
 Live data with embedded fallback. Earlier years have coarser age breakdowns (70+).
+
 
 
 
